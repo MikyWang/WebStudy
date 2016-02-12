@@ -1,0 +1,64 @@
+@CHARSET "UTF-8";
+body {
+    overflow: hidden;
+}
+
+#header {
+    width: 100%;
+    font-size: 30px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+#create {
+    background-color: white;
+    border: 0;
+    position: relative;
+    overflow: hidden !important;
+}
+
+#navigater {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    float: left;
+}
+
+.page {
+    min-width: 180px;
+    width: 15%;
+    margin: 10px auto 10px auto;
+}
+
+.page:nth-child(odd) {
+    animation: oddPage 1s;
+    -moz-animation: oddPage 1s; /* Firefox */
+    -webkit-animation: oddPage 1s; /* Safari and Chrome */
+    -o-animation: oddPage 1s; /* Opera */
+}
+
+.page:nth-child(even) {
+    animation: evenPage 1s;
+    -moz-animation: evenPage 1s; /* Firefox */
+    -webkit-animation: evenPage 1s; /* Safari and Chrome */
+    -o-animation: evenPage 1s; /* Opera */
+}
+
+#title {
+    position: relative;
+    top: 20%;
+    width: 200px;
+}
+
+@keyframes oddPage{
+
+0%        {left: -50%;top: 0%;}
+100%    {left:0%;top:0%;}
+}
+@keyframes evenPage{
+
+0%        {left: 50%;top: 0%;}
+100%    {left:0%;top:0%;}
+}
+

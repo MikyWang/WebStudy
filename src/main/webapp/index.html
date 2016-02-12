@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>辅助教学平台</title>
+        <script src="javascript/jquery-1.11.3.js"></script>
+        <script src="javascript/knockout-3.4.0.debug.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/index.css"/>
+        <link rel="stylesheet" type="text/css" href="css/baseStyle.css"/>
+        <script src="javascript/index.js"></script>
+    </head>
+
+    <body>
+        <div id="header" data-bind="css : {topbar : hasCreate}">
+            <span id="title">辅助教学平台</span>
+        </div>
+        <div id="navigater" data-bind="css : {navibar : hasCreate}">
+
+            <div id="htmlPage" class="page buttonBase enable" data-bind="click : createHtml" >
+                创建一个HTML页面
+            </div>
+            <div id="jspPage"   class="page buttonBase enable" data-bind="click : createJsp">
+                创建一个JSP页面
+            </div>
+
+        </div>
+        <iframe id="create"  data-bind="visible : hasCreate"></iframe>
+    </body>
+</html>

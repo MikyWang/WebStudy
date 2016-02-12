@@ -1,0 +1,55 @@
+@CHARSET "UTF-8";
+
+.baseFrame {
+    width: 50%;
+}
+
+#lefter {
+    float: left;
+    width: 100%;
+}
+
+#righter {
+    float: right;
+}
+
+#fileName {
+    width: 20%;
+    max-width: 150px;
+    position: relative;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+#Pane {
+    width: 98%;
+    font-size: 15px;
+    height: 83% !important;
+}
+
+#preview {
+    width: 98%;
+    height: 91% !important;
+    float: right;
+    background-color: white;
+    border: 0;
+}
+
+#submitButton {
+    float: right;
+    right: 2%;
+    margin-top: 15px;
+}
+#showPreview {
+    float: right;
+    right: 2%;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+#refreshPreview {
+    float: left;
+    left: 2%;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
