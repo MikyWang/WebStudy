@@ -6,17 +6,20 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.miky.WebStudy.Dao.IUserDao;
-import com.miky.WebStudy.Entity.User;
+import com.miky.WebStudy.Dao.userMapper;
+import com.miky.WebStudy.Entity.user;
 
 @Service
 public class UserService {
 
 	@Resource
-	IUserDao dao;
+	userMapper dao;
 
-	public List<User> selectAllUsers() {
-		return dao.selectAll();
+	public user selectUserByName(String userName) {
+		return dao.selectByUserName(userName);
 	}
 
+	public int insertUser(user user) {
+		return dao.insert(user);
+	}
 }

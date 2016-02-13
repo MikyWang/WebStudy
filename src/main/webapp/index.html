@@ -5,6 +5,7 @@
         <title>辅助教学平台</title>
         <script src="javascript/jquery-1.11.3.js"></script>
         <script src="javascript/knockout-3.4.0.debug.js"></script>
+        <script src="javascript/setUp.js"></script>
         <link rel="stylesheet" type="text/css" href="css/index.css"/>
         <link rel="stylesheet" type="text/css" href="css/baseStyle.css"/>
         <script src="javascript/index.js"></script>
@@ -15,15 +16,20 @@
             <span id="title">辅助教学平台</span>
         </div>
         <div id="navigater" data-bind="css : {navibar : hasCreate}">
-
-            <div id="htmlPage" class="page buttonBase enable" data-bind="click : createHtml" >
+            <div class="loginTable" data-bind="visible : !hasLogin()">
+                <input class="textBase input loginLine" id="userName" data-bind='value:userName, valueUpdate: "afterkeydown"' type="text" placeholder="请输入用户名"  />
+                <input class="textBase input loginLine" id="userPassword" data-bind='value:userPassword, valueUpdate: "afterkeydown"'  type="password" placeholder="请输入密码" />
+                <input type="button" id="register" value="注册" class="buttonBase enable loginLine" data-bind="click : register" />
+                <input type="button" id="login" value="登录" class="buttonBase loginLine" data-bind="click : login, enable : canLogin, css : {enable : canLogin}" />
+            </div>
+            <div id="htmlPage" class="page buttonBase enable" data-bind="click : createHtml, visible : hasLogin" >
                 创建一个HTML页面
             </div>
-            <div id="jspPage"   class="page buttonBase enable" data-bind="click : createJsp">
+            <div id="jspPage"   class="page buttonBase enable" data-bind="click : createJsp, visible : hasLogin">
                 创建一个JSP页面
             </div>
 
         </div>
-        <iframe id="create"  data-bind="visible : hasCreate"></iframe>
+        <iframe id="create"  data-bind="visible : hasCreate, attr : { src : htmlUrl }"></iframe>
     </body>
 </html>

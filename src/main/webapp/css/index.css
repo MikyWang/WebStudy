@@ -3,6 +3,28 @@ body {
     overflow: hidden;
 }
 
+#login {
+    float: right;
+    width: 100px;
+}
+
+#register {
+    float: left;
+    width: 100px;
+}
+
+.loginLine {
+    height: 20px;
+    display: block;
+    width: 220px;
+    margin: 0px 0px 10px 0px;
+}
+
+.loginTable {
+    margin: auto;
+    width: 220px;
+}
+
 #header {
     width: 100%;
     font-size: 30px;

@@ -14,6 +14,7 @@ var CreateHtmlViewModel = {
     preview : ko.observable("预览"),
 };
 
+
 $(window).resize(reSetSize);
 
 $(document).ready(function() {
