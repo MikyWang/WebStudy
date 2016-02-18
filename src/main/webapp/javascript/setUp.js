@@ -5,7 +5,6 @@ $(window).resize(setBlockSize);
 
 $(document).ready(function() {
     setBlockSize();
-    $('.blockPane').hide();
 });
 
 function setBlockSize() {
@@ -16,7 +15,6 @@ function setBlockSize() {
 function popUp() {
     if ($(this).attr('id') == "noButton") {
         $('.cd-popup').removeClass('is-visible');
-        $('.blockPane').hide();
     };
 }
 
@@ -28,3 +26,4 @@ function initSetUp() {
     $('#verifyFileName').hide();
     $('.alert').bind('click', popUp);
 }
+

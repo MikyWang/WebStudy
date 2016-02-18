@@ -23,7 +23,7 @@ public class UserController {
 	@ResponseBody
 	public user login(@RequestBody user user) {
 
-		user selecteduser = userService.selectUserByName(user.getUserName());
+		user selecteduser = userService.selectUser(user);
 
 		return selecteduser;
 
@@ -32,9 +32,12 @@ public class UserController {
 	@RequestMapping(value = "register", method = RequestMethod.POST)
 	@ResponseBody
 	public user register(@RequestBody user user) {
-		int x = userService.insertUser(user);
-		user newUser = userService.selectUserByName(user.getUserName());
-		System.out.println(x + newUser.getUserId());
+		user oldUser = userService.selectUser(user);
+		user newUser = null;
+		if (oldUser == null) {
+			userService.insertUser(user);
+			newUser = userService.selectUser(user);
+		}
 		return newUser;
 	}
 

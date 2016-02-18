@@ -5,24 +5,28 @@ body {
 
 #login {
     float: right;
-    width: 100px;
+    width: 45%;
 }
 
-#register {
+.register {
     float: left;
-    width: 100px;
+    width: 45% !important;
+}
+
+.registerLine {
+    margin: 0px 0px 10px 25% !important;
 }
 
 .loginLine {
     height: 20px;
     display: block;
-    width: 220px;
+    width: 100%;
     margin: 0px 0px 10px 0px;
 }
 
-.loginTable {
+.userTable {
     margin: auto;
-    width: 220px;
+    width: 20%;
 }
 
 #header {
@@ -54,17 +58,15 @@ body {
 }
 
 .page:nth-child(odd) {
-    animation: oddPage 1s;
-    -moz-animation: oddPage 1s; /* Firefox */
-    -webkit-animation: oddPage 1s; /* Safari and Chrome */
-    -o-animation: oddPage 1s; /* Opera */
+    -moz-animation: oddPage 0.5s; /* Firefox */
+    -webkit-animation: oddPage 0.5s; /* Safari and Chrome */
+    -o-animation: oddPage 0.5s; /* Opera */
 }
 
 .page:nth-child(even) {
-    animation: evenPage 1s;
-    -moz-animation: evenPage 1s; /* Firefox */
-    -webkit-animation: evenPage 1s; /* Safari and Chrome */
-    -o-animation: evenPage 1s; /* Opera */
+    -moz-animation: evenPage 0.5s; /* Firefox */
+    -webkit-animation: evenPage 0.5s; /* Safari and Chrome */
+    -o-animation: evenPage 0.5s; /* Opera */
 }
 
 #title {
@@ -73,13 +75,27 @@ body {
     width: 200px;
 }
 
-@keyframes oddPage{
+.animate {
+    position: absolute;
+    width: 20%;
+}
 
+.registerTable {
+    -moz-animation: registerTableA 0.5s;
+    -webkit-animation: registerTableA 0.5s;
+    -o-animation: registerTableA 0.5s;
+}
+
+@keyframes registerTableA{
+0%        {left: 0%;top: 0%;}
+100%    {left: 40%;top: 0%;}
+}
+
+@keyframes oddPage{
 0%        {left: -50%;top: 0%;}
 100%    {left:0%;top:0%;}
 }
 @keyframes evenPage{
-
 0%        {left: 50%;top: 0%;}
 100%    {left:0%;top:0%;}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.miky.WebStudy.Dao.userMapper;
 import com.miky.WebStudy.Entity.user;
+import com.miky.WebStudy.Entity.userKey;
 
 @Service
 public class UserService {
@@ -15,11 +16,11 @@ public class UserService {
 	@Resource
 	userMapper dao;
 
-	public user selectUserByName(String userName) {
-		return dao.selectByUserName(userName);
+	public user selectUser(userKey user) {
+		return dao.selectByPrimaryKey(user);
 	}
 
 	public int insertUser(user user) {
-		return dao.insert(user);
+		return dao.insertSelective(user);
 	}
 }

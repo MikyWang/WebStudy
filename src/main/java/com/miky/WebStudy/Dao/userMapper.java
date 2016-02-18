@@ -1,17 +1,19 @@
 package com.miky.WebStudy.Dao;
 
-import com.miky.WebStudy.Entity.user;
+import org.springframework.stereotype.Repository;
 
+import com.miky.WebStudy.Entity.user;
+import com.miky.WebStudy.Entity.userKey;
+
+@Repository
 public interface userMapper {
-    int deleteByPrimaryKey(String userId);
+    int deleteByPrimaryKey(userKey key);
 
     int insert(user record);
 
     int insertSelective(user record);
 
-    user selectByPrimaryKey(String userId);
-    
-    user selectByUserName(String userName);
+    user selectByPrimaryKey(userKey key);
 
     int updateByPrimaryKeySelective(user record);
 

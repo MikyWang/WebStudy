@@ -3,46 +3,95 @@ var viewModel = new indexViewModel();
 $(window).resize(reSetSize);
 
 $(document).ready(function() {
-    reSetSize();
     ko.applyBindings(viewModel);
+    reSetSize();
+    var spinnerU = {
+        fileName : "spinner.html"
+    };
+    viewModel.isLoading(true);
+    $.ajax({
+        type : "POST",
+        url : "getSpinner.do",
+        async : true,
+        contentType : "application/json; charset=utf-8",
+        data : JSON.stringify(spinnerU),
+        success : function(data) {
+            viewModel.spinner(data.fileBody);
+            viewModel.isLoading(false);
+        }
+    });
 });
 
 function indexViewModel() {
     var self = this;
+    this.isLoading = ko.observable(false);
     this.hasLogin = ko.observable(false);
     this.hasCreate = ko.observable(false);
+    this.isRegistering = ko.observable(false);
     this.htmlUrl = ko.observable("");
     this.userName = ko.observable("");
     this.userPassword = ko.observable("");
+    this.userPasswordT = ko.observable("");
+    this.isIncorrectMail = ko.observable(false);
+    this.userMail = ko.observable("");
+    this.spinner = ko.observable("");
+    this.isIncorrectPassword = ko.observable(false);
+    this.isInputNull = ko.computed(function() {
+        return (isNullOrUndefined(self.userName()) || isNullOrUndefined(self.userPassword()) || isNullOrUndefined(self.userPasswordT()) || isNullOrUndefined(self.userMail()));
+    }, this);
+    this.userPasswordT.subscribe(function(password) {
+        if (self.userPassword() != self.userPasswordT()) {
+            self.isIncorrectPassword(true);
+        } else {
+            self.isIncorrectPassword(false);
+        };
+    });
+    this.userMail.subscribe(function(mail) {
+        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if (!filter.test(mail)) {
+            self.isIncorrectMail(true);
+        } else {
+            self.isIncorrectMail(false);
+        };
+    });
     this.canLogin = ko.computed(function() {
         return !(isNullOrUndefined(this.userName()) || isNullOrUndefined(this.userPassword()));
     }, this);
     this.register = function() {
-        var user = {
-            userId : "",
-            userName : this.userName(),
-            password : this.userPassword(),
-            power : "2"
+        if (this.isRegistering()) {
+            if (self.isIncorrectMail() || self.isIncorrectPassword() || self.isInputNull()) {
+                alert("请输入正确的注册信息!");
+            } else {
+                var user = {
+                    userName : this.userName(),
+                    password : this.userPassword(),
+                    userMail : this.userMail()
+                };
+                self.isLoading(true);
+                $.ajax({
+                    type : "POST",
+                    url : "register.do",
+                    async : true,
+                    contentType : "application/json; charset=utf-8",
+                    data : JSON.stringify(user),
+                    success : function(data) {
+
+                        self.hasLogin(true);
+                        self.isLoading(false);
+                    }
+                });
+            };
+        } else {
+            this.isRegistering(true);
         };
-        $.ajax({
-            type : "POST",
-            url : "register.do",
-            async : true,
-            contentType : "application/json; charset=utf-8",
-            data : JSON.stringify(user),
-            success : function(data) {
-                var newuser = data;
-                self.hasLogin(true);
-            }
-        });
+
     };
     this.login = function() {
         var user = {
-            userId : "",
             userName : this.userName(),
             password : this.userPassword(),
-            power : "2"
         };
+        self.isLoading(true);
         $.ajax({
             type : "POST",
             url : "login.do",
@@ -59,6 +108,7 @@ function indexViewModel() {
                 } else {
                     alert("不存在此用户，请先注册~");
                 };
+                self.isLoading(false);
             }
         });
     };
@@ -99,8 +149,8 @@ function reSetSize() {
             });
         });
     } else {
-        headerHeight = (winHeight * 0.4);
-        bodyHeight = (winHeight * 0.6);
+        headerHeight = (winHeight * 0.3);
+        bodyHeight = (winHeight * 0.7);
     };
     $('#header').animate({
         height : headerHeight,
