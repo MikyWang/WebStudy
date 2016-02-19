@@ -3,28 +3,12 @@ var viewModel = new indexViewModel();
 $(window).resize(reSetSize);
 
 $(document).ready(function() {
-    ko.applyBindings(viewModel);
+    ko.attach("viewModel",viewModel);
     reSetSize();
-    var spinnerU = {
-        fileName : "spinner.html"
-    };
-    viewModel.isLoading(true);
-    $.ajax({
-        type : "POST",
-        url : "getSpinner.do",
-        async : true,
-        contentType : "application/json; charset=utf-8",
-        data : JSON.stringify(spinnerU),
-        success : function(data) {
-            viewModel.spinner(data.fileBody);
-            viewModel.isLoading(false);
-        }
-    });
 });
 
 function indexViewModel() {
     var self = this;
-    this.isLoading = ko.observable(false);
     this.hasLogin = ko.observable(false);
     this.hasCreate = ko.observable(false);
     this.isRegistering = ko.observable(false);
@@ -34,7 +18,6 @@ function indexViewModel() {
     this.userPasswordT = ko.observable("");
     this.isIncorrectMail = ko.observable(false);
     this.userMail = ko.observable("");
-    this.spinner = ko.observable("");
     this.isIncorrectPassword = ko.observable(false);
     this.isInputNull = ko.computed(function() {
         return (isNullOrUndefined(self.userName()) || isNullOrUndefined(self.userPassword()) || isNullOrUndefined(self.userPasswordT()) || isNullOrUndefined(self.userMail()));
@@ -67,7 +50,7 @@ function indexViewModel() {
                     password : this.userPassword(),
                     userMail : this.userMail()
                 };
-                self.isLoading(true);
+                spinnerModel.isLoading(true);
                 $.ajax({
                     type : "POST",
                     url : "register.do",
@@ -75,9 +58,8 @@ function indexViewModel() {
                     contentType : "application/json; charset=utf-8",
                     data : JSON.stringify(user),
                     success : function(data) {
-
                         self.hasLogin(true);
-                        self.isLoading(false);
+                        spinnerModel.isLoading(false);
                     }
                 });
             };
@@ -91,7 +73,7 @@ function indexViewModel() {
             userName : this.userName(),
             password : this.userPassword(),
         };
-        self.isLoading(true);
+        spinnerModel.isLoading(true);
         $.ajax({
             type : "POST",
             url : "login.do",
@@ -108,7 +90,7 @@ function indexViewModel() {
                 } else {
                     alert("不存在此用户，请先注册~");
                 };
-                self.isLoading(false);
+                spinnerModel.isLoading(false);
             }
         });
     };
