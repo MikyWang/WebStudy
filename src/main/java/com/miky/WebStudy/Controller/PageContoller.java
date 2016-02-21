@@ -21,6 +21,12 @@ public class PageContoller {
 		return "createHtml";
 	}
 
+	@RequestMapping(value="test")
+	public String test()
+	{
+		return "test";
+	}
+	
 	@RequestMapping(value = "uploadHtml", method = RequestMethod.POST)
 	@ResponseBody
 	public String upload_html(@RequestBody UploadFile uploadFile, HttpServletRequest request,

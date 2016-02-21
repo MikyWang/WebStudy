@@ -3,7 +3,7 @@ var viewModel = new indexViewModel();
 $(window).resize(reSetSize);
 
 $(document).ready(function() {
-    ko.attach("viewModel",viewModel);
+    ko.attach("viewModel", viewModel);
     reSetSize();
 });
 
@@ -95,8 +95,14 @@ function indexViewModel() {
         });
     };
     this.createJsp = function() {
-        indexViewModel.hasCreate(true);
-        $('#create').attr("src", "createJsp.do");
+        $.ajax({
+            url : "createHtml.do",
+            async : true,
+            success : function(data) {
+                self.jspUrl(data);
+            }
+        });
+        this.hasJsp(true);
         reSetSize();
     };
     this.createHtml = function() {
@@ -116,7 +122,7 @@ function reSetSize() {
     var winWidth = $(window).width();
     var headerHeight;
     var bodyHeight;
-    if (viewModel.hasCreate()) {
+    if (viewModel.hasCreate() || viewModel.hasJsp()) {
         headerHeight = winHeight * 0.1;
         bodyHeight = winHeight * 0.9;
         $('#create').animate({
