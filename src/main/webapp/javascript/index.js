@@ -4,6 +4,17 @@ $(window).resize(reSetSize);
 
 $(document).ready(function() {
     ko.attach("viewModel", viewModel);
+    $.ajax({
+        url : "loginByRecord.do",
+        async : true,
+        success : function(data) {
+            if (!isNullOrUndefined(data)) {
+                viewModel.userName(data.userName);
+                viewModel.userPassword(data.password);
+                viewModel.hasLogin(true);
+            };
+        }
+    });
     reSetSize();
 });
 
@@ -122,7 +133,7 @@ function reSetSize() {
     var winWidth = $(window).width();
     var headerHeight;
     var bodyHeight;
-    if (viewModel.hasCreate() || viewModel.hasJsp()) {
+    if (viewModel.hasCreate()) {
         headerHeight = winHeight * 0.1;
         bodyHeight = winHeight * 0.9;
         $('#create').animate({
