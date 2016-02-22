@@ -35,12 +35,10 @@ public class UserController {
 		user user = new user();
 		if (record != null) {
 			user.setUserId(record.getUserId());
-			user.setUserName(record.getUserName());
-			user.setPassword(record.getUserPassword());
 		} else {
 			user = null;
 		}
-		return user;
+		return userService.selectUser(user);
 
 	}
 

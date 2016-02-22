@@ -2,10 +2,10 @@
  * @author v-qimiky
  */
 $(window).resize(setBlockSize);
-var spinnerModel=new spinnerModel();
+var spinnerModel = new spinnerModel();
 
 $(document).ready(function() {
-    ko.attach("spinnerModel",spinnerModel);
+    ko.attach("spinnerModel", spinnerModel);
     var spinnerU = {
         fileName : "spinner.html"
     };
@@ -24,9 +24,9 @@ $(document).ready(function() {
     setBlockSize();
 });
 
-function spinnerModel(){
-    var self=this;
-    this.spinner=ko.observable("");
+function spinnerModel() {
+    var self = this;
+    this.spinner = ko.observable("");
     this.isLoading = ko.observable(false);
 }
 
@@ -44,6 +44,52 @@ function popUp() {
 function isNullOrUndefined(object) {
     return object == null || object == "" || object == undefined;
 }
+
+ko.bindingHandlers.leftVisible = {
+    init : function(element, valueAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        if (value) {
+            $(element).show();
+        } else {
+            $(element).hide();
+        };
+    },
+    update : function(element, valueAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        if (value == false) {
+            $(element).animate({
+                left : $(window).width(),
+                opacity : '0.2',
+            }, "slow", function() {
+                $(element).hide();
+            });
+        } else {
+            $(element).show().animate({
+                left : ($(window).width() - $(element).width()) / 2,
+                opacity : '1',
+            }, "slow");
+        };
+    }
+};
+
+ko.bindingHandlers.showVisible = {
+    init : function(element, valueAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        if (value) {
+            $(element).show();
+        } else {
+            $(element).hide();
+        };
+    },
+    update : function(element, valueAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        if (value) {
+            $(element).show(300);
+        } else {
+            $(element).hide(300);
+        };
+    }
+};
 
 function initSetUp() {
     $('#verifyFileName').hide();

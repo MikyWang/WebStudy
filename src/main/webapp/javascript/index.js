@@ -11,7 +11,6 @@ $(document).ready(function() {
             if (!isNullOrUndefined(data)) {
                 viewModel.userName(data.userName);
                 viewModel.userPassword(data.password);
-                viewModel.hasLogin(true);
             };
         }
     });
@@ -151,10 +150,6 @@ function reSetSize() {
         headerHeight = (winHeight * 0.3);
         bodyHeight = (winHeight * 0.7);
     };
-    $('#header').animate({
-        height : headerHeight,
-    });
-    $('#navigater').animate({
-        height : bodyHeight,
-    });
+    $('#header').height(headerHeight);
+    $('#navigater').height(bodyHeight);
 }

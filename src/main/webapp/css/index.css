@@ -25,8 +25,8 @@ body {
 }
 
 .userTable {
-    margin: auto;
-    width: 20%;
+    position:relative;
+    width: 100%;
 }
 
 #header {
@@ -54,19 +54,7 @@ body {
 .page {
     min-width: 180px;
     width: 15%;
-    margin: 10px auto 10px auto;
-}
-
-.page:nth-child(odd) {
-    -moz-animation: oddPage 0.5s; /* Firefox */
-    -webkit-animation: oddPage 0.5s; /* Safari and Chrome */
-    -o-animation: oddPage 0.5s; /* Opera */
-}
-
-.page:nth-child(even) {
-    -moz-animation: evenPage 0.5s; /* Firefox */
-    -webkit-animation: evenPage 0.5s; /* Safari and Chrome */
-    -o-animation: evenPage 0.5s; /* Opera */
+    margin: 10px 0 10px 0;
 }
 
 #title {
@@ -78,25 +66,5 @@ body {
 .animate {
     position: absolute;
     width: 20%;
-}
-
-.registerTable {
-    -moz-animation: registerTableA 0.5s;
-    -webkit-animation: registerTableA 0.5s;
-    -o-animation: registerTableA 0.5s;
-}
-
-@keyframes registerTableA{
-0%        {left: 0%;top: 0%;}
-100%    {left: 40%;top: 0%;}
-}
-
-@keyframes oddPage{
-0%        {left: -50%;top: 0%;}
-100%    {left:0%;top:0%;}
-}
-@keyframes evenPage{
-0%        {left: 50%;top: 0%;}
-100%    {left:0%;top:0%;}
 }
 
