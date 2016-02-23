@@ -1,6 +1,12 @@
 //# sourceURL=user.js
 
 var userModel = new userModel();
+$(window).resize(userSize);
+
+function userSize() {
+    userModel.winWidth($(window).width());
+}
+
 
 $(document).ready(function() {
     ko.attach("userModel", userModel);
@@ -18,6 +24,7 @@ $(document).ready(function() {
 
 function userModel() {
     var self = this;
+    this.winWidth = ko.observable();
     this.hasLogin = ko.observable(false);
     this.isRegistering = ko.observable(false);
     this.userName = ko.observable("");
@@ -91,6 +98,7 @@ function userModel() {
                 if (!isNullOrUndefined(data)) {
                     if (data.password == user.password) {
                         self.hasLogin(true);
+                        viewModel.hasLogin(true);
                     } else {
                         alert("密码错误！");
                     };

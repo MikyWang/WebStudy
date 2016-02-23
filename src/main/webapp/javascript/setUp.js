@@ -54,18 +54,19 @@ ko.bindingHandlers.leftVisible = {
             $(element).hide();
         };
     },
-    update : function(element, valueAccessor) {
+    update : function(element, valueAccessor, allBindingsAccessor, viewModel) {
         var value = ko.utils.unwrapObservable(valueAccessor());
         if (value == false) {
             $(element).animate({
-                left : $(window).width(),
+                left : '-' + ($(window).width() - $(element).width()) / 2 + 'px',
                 opacity : '0.2',
             }, "slow", function() {
                 $(element).hide();
             });
         } else {
             $(element).show().animate({
-                left : ($(window).width() - $(element).width()) / 2,
+                left : '50%',
+                marginLeft :'-'+$(element).width(),
                 opacity : '1',
             }, "slow");
         };
@@ -90,6 +91,18 @@ ko.bindingHandlers.showVisible = {
         };
     }
 };
+
+function navigate(url) {
+    var content = null;
+    $.ajax({
+        url : url,
+        async : false,
+        success : function(data) {
+            content = data;
+        }
+    });
+    return content;
+}
 
 function initSetUp() {
     $('#verifyFileName').hide();

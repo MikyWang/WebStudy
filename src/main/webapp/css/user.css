@@ -1,0 +1,35 @@
+.userTable {
+    position: relative;
+    width: 100%;
+}
+
+#loginTable {
+    position: absolute;
+    width: 20%;
+}
+
+#registerTable {
+    position: absolute;
+    width: 20%;
+}
+
+.loginLine {
+    height: 30px;
+    display: block;
+    width: 100%;
+    margin: 0px 0px 10px 0px;
+}
+
+.register {
+    float: left;
+    width: 45% !important;
+}
+
+#login {
+    float: right;
+    width: 45%;
+}
+
+.registerLine {
+    margin: 0px 0px 10px 25% !important;
+}

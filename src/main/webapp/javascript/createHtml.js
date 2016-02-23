@@ -6,22 +6,64 @@ var uploadString = "是否查看代码生成的网页?";
 var emptyFileNameString = "请输入文件名";
 var hasPoint = false;
 
-var CreateHtmlViewModel = {
-    showPreview : showPreview,
-    refreshPreview : refreshPreview,
-    upload : upload,
-    isShowClick : ko.observable(false),
-    preview : ko.observable("预览"),
-};
+var createPageModel = new createPageModel();
 
-
-$(window).resize(reSetSize);
+$(window).resize(reSize);
 
 $(document).ready(function() {
     InitHtml();
-    reSetSize();
-    ko.applyBindings(CreateHtmlViewModel);
+    reSize();
+    ko.attach("createPageModel", createPageModel);
 });
+
+function createPageModel() {
+    var self = this;
+    this.preview = ko.observable("预览");
+    this.isShowClick = ko.observable(false);
+    this.refreshPreview = function() {
+        var uploadFile = generatePreviewFile();
+        saveFile(uploadFile, function() {
+            $('#preview').attr("src", path);
+        });
+    };
+    this.upload = function() {
+        $('.blockPane').show();
+        if ($('#fileName').val() == "") {
+            $('#popUpTitle').html(emptyFileNameString);
+            $('#verifyFileName').show();
+            verifyFileName();
+            $('.cd-popup').addClass('is-visible');
+            $('.alert').unbind('click', jumpToNewPage).bind('click', saveFileName);
+        } else {
+            var uploadFile = {
+                fileName : $('#fileName').val(),
+                fileBody : $('#Pane').val()
+            };
+            saveFile(uploadFile, function() {
+                $('.alert').unbind('click', saveFileName).bind('click', jumpToNewPage);
+                $('#popUpTitle').html(uploadString);
+                $('.cd-popup').addClass('is-visible');
+            });
+        };
+    };
+    this.showPreview = function() {
+        self.isShowClick(!self.isShowClick());
+        if (!self.isShowClick()) {
+            self.preview("预览");
+        } else {
+            self.preview("取消预览");
+        };
+        if (self.isShowClick()) {
+            var uploadFile = generatePreviewFile();
+            saveFile(uploadFile, function() {
+                $('#preview').attr("src", path);
+                reSize();
+            });
+        } else {
+            reSize();
+        };
+    };
+}
 
 function InitHtml() {
     $.ajax({
@@ -30,7 +72,7 @@ function InitHtml() {
         async : true,
         success : function(data) {
             $('body').prepend(data);
-            $('#submitButton').bind('click', upload);
+            $('#submitButton').bind('click', createPageModel.upload);
             $('.input').bind('input', addSuffix).bind('change', checkSuffix);
             initSetUp();
         }
@@ -78,27 +120,6 @@ function saveFile(uploadFile, success) {
     });
 }
 
-function upload() {
-    $('.blockPane').show();
-    if ($('#fileName').val() == "") {
-        $('#popUpTitle').html(emptyFileNameString);
-        $('#verifyFileName').show();
-        verifyFileName();
-        $('.cd-popup').addClass('is-visible');
-        $('.alert').unbind('click', jumpToNewPage).bind('click', saveFileName);
-    } else {
-        var uploadFile = {
-            fileName : $('#fileName').val(),
-            fileBody : $('#Pane').val()
-        };
-        saveFile(uploadFile, function() {
-            $('.alert').unbind('click', saveFileName).bind('click', jumpToNewPage);
-            $('#popUpTitle').html(uploadString);
-            $('.cd-popup').addClass('is-visible');
-        });
-    };
-}
-
 function verifyFileName() {
     var verifyFileName = $('#verifyFileName').val();
     if (isNullOrUndefined(verifyFileName)) {
@@ -122,13 +143,6 @@ function jumpToNewPage() {
     };
 }
 
-function refreshPreview() {
-    var uploadFile = generatePreviewFile();
-    saveFile(uploadFile, function() {
-        $('#preview').attr("src", path);
-    });
-}
-
 function generatePreviewFile() {
     return {
         fileName : "temp.html",
@@ -136,35 +150,17 @@ function generatePreviewFile() {
     };
 }
 
-function showPreview() {
-    CreateHtmlViewModel.isShowClick(!CreateHtmlViewModel.isShowClick());
-    if (!CreateHtmlViewModel.isShowClick()) {
-        CreateHtmlViewModel.preview("预览");
-    } else {
-        CreateHtmlViewModel.preview("取消预览");
-    };
-    if (CreateHtmlViewModel.isShowClick()) {
-        var uploadFile = generatePreviewFile();
-        saveFile(uploadFile, function() {
-            $('#preview').attr("src", path);
-            reSetSize();
-        });
-    } else {
-        reSetSize();
-    };
-}
-
-function reSetSize() {
+function reSize() {
     $('#lefter').clearQueue();
     if ($(window).width() <= 1000) {
-        CreateHtmlViewModel.isShowClick(false);
+        createPageModel.isShowClick(false);
         $('#showPreview').hide();
         $('#lefter').animate({
             width : "100%"
         });
     } else {
         $('#showPreview').show();
-        if (CreateHtmlViewModel.isShowClick()) {
+        if (createPageModel.isShowClick()) {
             $('#lefter').animate({
                 width : "50%"
             });

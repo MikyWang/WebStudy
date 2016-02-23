@@ -4,20 +4,13 @@ $(window).resize(reSetSize);
 
 $(document).ready(function() {
     ko.attach("viewModel", viewModel);
-    $.ajax({
-        url : "userPage.do",
-        async : true,
-        success : function(data) {
-            $('#userPage').html(data);
-        }
-    });
+    $('#userPage').html(navigate("userPage.do"));
     reSetSize();
 });
 
 function indexViewModel() {
     var self = this;
     this.hasCreate = ko.observable(false);
-    this.htmlUrl = ko.observable("");
     this.hasLogin = ko.observable(false);
     this.createJsp = function() {
         $.ajax({
@@ -32,10 +25,9 @@ function indexViewModel() {
     };
     this.createHtml = function() {
         this.hasCreate(true);
-        this.htmlUrl("createHtml.do");
+        $('#createPage').html(navigate("createHtml.do"));
         reSetSize();
     };
-
 }
 
 function reSetSize() {
