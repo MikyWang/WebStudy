@@ -21,6 +21,11 @@ public class PageContoller {
 		return "createHtml";
 	}
 
+	@RequestMapping(value="userPage")
+	public String userPage(){
+		return "User";
+	}
+	
 	@RequestMapping(value="test")
 	public String test()
 	{
