@@ -66,7 +66,7 @@ ko.bindingHandlers.leftVisible = {
         } else {
             $(element).show().animate({
                 left : '50%',
-                marginLeft :'-'+$(element).width(),
+                marginLeft :'-'+$(element).width()/2,
                 opacity : '1',
             }, "slow");
         };
@@ -85,9 +85,13 @@ ko.bindingHandlers.showVisible = {
     update : function(element, valueAccessor) {
         var value = ko.utils.unwrapObservable(valueAccessor());
         if (value) {
-            $(element).show(300);
+            $(element).show(300).animate({
+                opacity:'1'
+            });
         } else {
-            $(element).hide(300);
+            $(element).animate({
+                opacity:'0.2'
+            }).hide(300);
         };
     }
 };
