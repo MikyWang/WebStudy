@@ -6,6 +6,7 @@ body {
 }
 
 .navibar {
+    width: 15% !important;
 }
 
 .incorrect {
@@ -16,6 +17,7 @@ body {
 .topbar {
     background-color: rgba(78, 108, 198, 1);
     color: rgba(255, 255, 255, 1);
+    text-align: left !important;
 }
 
 .buttonBase {

@@ -9,10 +9,15 @@
 <script src="javascript/user.js"></script>
 </head>
 <body>
+	<div class="userPane" data-bind="showVisible : hasLogin">
+		<img alt="用户头像" src="images/userPicture.png">
+		<div data-bind="text : userMail"></div>
+		<div data-bind="text : userName"></div>
+	</div>
 	<div class="userTable" data-bind="showVisible : !hasLogin()">
 		<div id="loginTable" data-bind="leftVisible : !isRegistering()">
 			<input class="textBase input loginLine" id="userName"
-				data-bind='value:userName, valueUpdate: "afterkeydown"' type="text"
+				data-bind='value : userName, valueUpdate: "afterkeydown"' type="text"
 				placeholder="请输入用户名" />
 			<input class="textBase input loginLine" id="userPassword"
 				data-bind='value:userPassword, valueUpdate: "afterkeydown"' type="password"
@@ -35,7 +40,7 @@
 				placeholder="请再次输入密码" />
 			<div class="incorrect" data-bind="showVisible : isIncorrectMail">邮箱格式错误!</div>
 			<input class="textBase input loginLine"
-				data-bind='value:userMail, valueUpdate: "afterkeydown"' type="text"
+				data-bind='value : userMail, valueUpdate: "afterkeydown"' type="text"
 				placeholder="请输入邮箱地址" />
 			<input type="button" value="注册"
 				class="register buttonBase enable registerLine "

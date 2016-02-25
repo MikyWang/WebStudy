@@ -27,6 +27,7 @@ function indexViewModel() {
         this.hasCreate(true);
         $('#createPage').html(navigate("createHtml.do"));
         reSetSize();
+        $('.userPane').css({color : '#FFF'});
     };
 }
 

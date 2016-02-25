@@ -170,7 +170,7 @@ function reSize() {
             });
         };
     };
-    var winHeight = $(window).height();
+    var winHeight = $(window).height()*0.9;
     var htmlPaneHeight = winHeight * 0.83;
     $('.baseFrame').css("height", winHeight.toString());
 }

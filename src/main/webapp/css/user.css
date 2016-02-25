@@ -3,6 +3,33 @@
     width: 100%;
 }
 
+.userPane {
+    right: 10px;
+    top: 5px;
+    position: absolute;
+    width: 185px;
+    height: 50px;
+    font-size: 13px;
+}
+
+.userPane > div:nth-child(2) {
+    left: 55px;
+    top: 0px;
+    position: absolute;
+}
+
+.userPane > div:nth-child(3) {
+    position: absolute;
+    left: 55px;
+    bottom: 0px;
+}
+
+img {
+    width: 50px;
+    left: 0px;
+    position: absolute;
+}
+
 #loginTable {
     position: absolute;
     width: 20%;

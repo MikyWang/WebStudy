@@ -17,6 +17,7 @@ $(document).ready(function() {
             if (!isNullOrUndefined(data)) {
                 userModel.userName(data.userName);
                 userModel.userPassword(data.password);
+                userModel.userMail(data.userMail);
             };
         }
     });
