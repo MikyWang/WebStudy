@@ -10,11 +10,13 @@
 <body>
 	<div class="blockPane"></div>
 	<div id="lefter" class="baseFrame ">
-		<input type="text" placeholder="请输入文件名:" id="fileName" class="textBase input" />
+		<input type="text" placeholder="请输入文件名:" id="fileName"
+			class="textBase input" />
 		<div id="showPreview" class="buttonBase enable"
 			data-bind="click : showPreview,html : preview"></div>
 		<textarea id="Pane" class="textBase" spellcheck="false"></textarea>
-		<div id="submitButton" class="buttonBase enable" data-bind="click : upload">上传代码</div>
+		<div id="submitButton" class="buttonBase enable"
+			data-bind="click : upload">上传代码</div>
 	</div>
 	<div id="righter" class="baseFrame" data-bind="visible : isShowClick">
 		<div id="refreshPreview" class="buttonBase enable"

@@ -6,7 +6,7 @@ body {
 }
 
 .navibar {
-    width: 15% !important;
+    width: 200px !important;
 }
 
 .incorrect {
@@ -15,6 +15,7 @@ body {
 }
 
 .topbar {
+    height:60px !important;
     background-color: rgba(78, 108, 198, 1);
     color: rgba(255, 255, 255, 1);
     text-align: left !important;
