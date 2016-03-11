@@ -21,6 +21,7 @@ $(document).ready(function() {
             };
         }
     });
+    setBlockSize();
 });
 
 function userModel() {

@@ -1,8 +1,9 @@
 /**
  * @author v-qimiky
  */
-$(window).resize(setBlockSize);
 var spinnerModel = new spinnerModel();
+
+$(window).resize(setBlockSize);
 
 $(document).ready(function() {
     ko.attach("spinnerModel", spinnerModel);
@@ -21,7 +22,6 @@ $(document).ready(function() {
             spinnerModel.isLoading(false);
         }
     });
-    setBlockSize();
 });
 
 function spinnerModel() {
@@ -30,19 +30,13 @@ function spinnerModel() {
     this.isLoading = ko.observable(false);
 }
 
+function isNullOrUndefined(object) {
+    return object == null || object == "" || object == undefined;
+}
+
 function setBlockSize() {
     var winHeight = $(window).height();
     $('.blockPane').height(winHeight);
-}
-
-function popUp() {
-    if ($(this).attr('id') == "noButton") {
-        $('.cd-popup').removeClass('is-visible');
-    };
-}
-
-function isNullOrUndefined(object) {
-    return object == null || object == "" || object == undefined;
 }
 
 ko.bindingHandlers.leftVisible = {
@@ -66,7 +60,7 @@ ko.bindingHandlers.leftVisible = {
         } else {
             $(element).show().animate({
                 left : '50%',
-                marginLeft :'-'+$(element).width()/2,
+                marginLeft : '-' + $(element).width() / 2,
                 opacity : '1',
             }, "slow");
         };
@@ -86,12 +80,34 @@ ko.bindingHandlers.showVisible = {
         var value = ko.utils.unwrapObservable(valueAccessor());
         if (value) {
             $(element).show(300).animate({
-                opacity:'1'
+                opacity : '1'
             });
         } else {
             $(element).animate({
-                opacity:'0.2'
+                opacity : '0.2'
             }).hide(300);
+        };
+    }
+};
+
+ko.bindingHandlers.suffix = {
+    init : function(element, valueAccessor, allBindingsAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        var allBindings = allBindingsAccessor();
+        $(element).bind('input', function() {
+            if (allBindings.fileName.indexOf('.') < 0) {
+                value(true);
+            } else {
+                value(false);
+            };
+        });
+    },
+    update : function(element, valueAccessor, allBindingsAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        var allBindings = allBindingsAccessor();
+        if (value) {
+            allBindings.fileName(allBindings.fileName + 'html');
+            value(false);
         };
     }
 };
@@ -106,10 +122,5 @@ function navigate(url) {
         }
     });
     return content;
-}
-
-function initSetUp() {
-    $('#verifyFileName').hide();
-    $('.alert').bind('click', popUp);
 }
 

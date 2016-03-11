@@ -18,20 +18,20 @@ public class PageContoller {
 
 	@RequestMapping(value = "createHtml")
 	public String createHtml() {
-		return "createHtml";
+
+		return "CodeEdit";
 	}
 
-	@RequestMapping(value="userPage")
-	public String userPage(){
+	@RequestMapping(value = "userPage")
+	public String userPage() {
 		return "User";
 	}
-	
-	@RequestMapping(value="test")
-	public String test()
-	{
+
+	@RequestMapping(value = "test")
+	public String test() {
 		return "test";
 	}
-	
+
 	@RequestMapping(value = "uploadHtml", method = RequestMethod.POST)
 	@ResponseBody
 	public String upload_html(@RequestBody UploadFile uploadFile, HttpServletRequest request,
