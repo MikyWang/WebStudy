@@ -15,7 +15,7 @@ body {
 }
 
 .topbar {
-    height:60px !important;
+    height: 60px !important;
     background-color: rgba(78, 108, 198, 1);
     color: rgba(255, 255, 255, 1);
     text-align: left !important;
@@ -31,6 +31,11 @@ body {
     position: relative;
     border: 0px;
     text-align: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .enable:hover {

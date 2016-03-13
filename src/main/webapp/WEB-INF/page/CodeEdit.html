@@ -5,6 +5,10 @@
         <title>CodeEdit</title>
     </head>
     <body>
-
+        <div class="blockPane" data-bind="showVisible : isBlocked "></div>
+        <div>
+            <input type="text"  class="textBase input" data-bind='value : fileName, valueUpdate : "afterkeydown"'  placeholder="请输入文件名:" />
+        </div>
+        <div></div>
     </body>
 </html>
