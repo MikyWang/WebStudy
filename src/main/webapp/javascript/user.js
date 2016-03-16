@@ -27,7 +27,9 @@ $(document).ready(function() {
 function userModel() {
     var self = this;
     this.winWidth = ko.observable();
-    this.hasLogin = ko.observable(false);
+    this.hasLogin = ko.computed(function() {
+        return viewModel.hasLogin();
+    }, this);
     this.isRegistering = ko.observable(false);
     this.userName = ko.observable("");
     this.userPassword = ko.observable("");
@@ -74,7 +76,7 @@ function userModel() {
                     contentType : "application/json; charset=utf-8",
                     data : JSON.stringify(user),
                     success : function(data) {
-                        self.hasLogin(true);
+                        viewModel.hasLogin(true);
                         spinnerModel.isLoading(false);
                     }
                 });
@@ -99,7 +101,7 @@ function userModel() {
             success : function(data) {
                 if (!isNullOrUndefined(data)) {
                     if (data.password == user.password) {
-                        self.hasLogin(true);
+                        self.userMail(data.userMail);
                         viewModel.hasLogin(true);
                     } else {
                         alert("密码错误！");

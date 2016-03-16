@@ -9,10 +9,13 @@ body {
     text-align: center;
     overflow: hidden;
     position: relative;
+    height: 30%;
 }
 
-#createPage{
+#createPage {
     float: left;
+    position: relative;
+    top: 10px;
 }
 
 #create {

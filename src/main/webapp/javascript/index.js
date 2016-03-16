@@ -1,7 +1,9 @@
 var viewModel = new indexViewModel();
+var topModel=new topModel();
 
 $(document).ready(function() {
     ko.attach("viewModel", viewModel);
+    ko.attach("topModel",topModel);
     $('#userPage').html(navigate("userPage.do"));
     setBlockSize();
 });
