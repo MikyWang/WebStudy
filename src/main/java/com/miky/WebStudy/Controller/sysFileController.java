@@ -18,7 +18,7 @@ public class sysFileController {
 	@Resource
 	sysFileService service;
 
-	@RequestMapping(value = "getSpinner", method = RequestMethod.POST)
+	@RequestMapping(value = "getSysFile", method = RequestMethod.POST)
 	@ResponseBody
 	public sysFile getSpinner(@RequestBody sysFileKey sysFileKey) {
 		return service.getSysFile(sysFileKey);

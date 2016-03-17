@@ -13,7 +13,7 @@ $(document).ready(function() {
     spinnerModel.isLoading(true);
     $.ajax({
         type : "POST",
-        url : "getSpinner.do",
+        url : "getSysFile.do",
         async : true,
         contentType : "application/json; charset=utf-8",
         data : JSON.stringify(spinnerU),
@@ -95,7 +95,7 @@ ko.bindingHandlers.suffix = {
         var value = ko.utils.unwrapObservable(valueAccessor());
         var allBindings = allBindingsAccessor();
         $(element).bind('input', function() {
-            if (allBindings.fileName.indexOf('.') < 0) {
+            if (allBindings.fileName().indexOf('.') < 0) {
                 value(true);
             } else {
                 value(false);

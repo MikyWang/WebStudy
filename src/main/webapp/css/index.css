@@ -15,7 +15,9 @@ body {
 #createPage {
     float: left;
     position: relative;
-    top: 10px;
+    top: 1%;
+    width: 86%;
+    height: 100%;
 }
 
 #create {

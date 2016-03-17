@@ -36,6 +36,11 @@ body {
     position: relative;
     border: 0px;
     text-align: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .enable:hover {

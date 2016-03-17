@@ -1,24 +1,28 @@
 var viewModel = new indexViewModel();
-var topModel=new topModel();
+var topModel = new topModel();
 
 $(document).ready(function() {
     ko.attach("viewModel", viewModel);
-    ko.attach("topModel",topModel);
+    ko.attach("topModel", topModel);
     $('#userPage').html(navigate("userPage.do"));
     setBlockSize();
 });
 
 function topModel() {
     var self = this;
-    this.hasCreate = ko.computed(function() {
-        return viewModel.hasCreate();
+    this.hasCreated = ko.computed(function() {
+        return viewModel.hasCreated();
     }, this);
 }
 
 function indexViewModel() {
     var self = this;
-    this.hasCreate = ko.observable(false);
+    this.initHtml = ko.observable(false);
+    this.initJsp = ko.observable(false);
     this.hasLogin = ko.observable(false);
+    this.hasCreated = ko.computed(function() {
+        return this.initHtml() || this.initJsp();
+    }, this);
     this.height = ko.observable();
     this.createJsp = function() {
         $.ajax({
@@ -28,10 +32,10 @@ function indexViewModel() {
                 self.jspUrl(data);
             }
         });
-        this.hasJsp(true);
+        this.initJsp(true);
     };
     this.createHtml = function() {
-        this.hasCreate(true);
+        this.initHtml(true);
         $('#createPage').html(navigate("createHtml.do"));
         $('.userPane').css({
             color : '#FFF'
