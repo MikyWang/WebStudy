@@ -4,8 +4,7 @@ var topModel = new topModel();
 $(document).ready(function() {
     ko.attach("viewModel", viewModel);
     ko.attach("topModel", topModel);
-    $('#userPage').html(navigate("userPage.do"));
-    setBlockSize();
+    $('#userPage').html(navigate("userPage.do", '#userPage'));
 });
 
 function topModel() {
@@ -25,20 +24,32 @@ function indexViewModel() {
     }, this);
     this.height = ko.observable();
     this.createJsp = function() {
-        $.ajax({
-            url : "createHtml.do",
-            async : true,
-            success : function(data) {
-                self.jspUrl(data);
-            }
-        });
-        this.initJsp(true);
+        if (!self.hasCreated()) {
+            this.initJsp(true);
+            this.initHtml(false);
+            $('#createPage').html(navigate("createHtml.do", '#createPage'));
+            $('.userPane').css({
+                color : '#FFF'
+            });
+        } else {
+            this.initJsp(true);
+            this.initHtml(false);
+            initContent();
+        };
+
     };
     this.createHtml = function() {
-        this.initHtml(true);
-        $('#createPage').html(navigate("createHtml.do"));
-        $('.userPane').css({
-            color : '#FFF'
-        });
+        if (!self.hasCreated()) {
+            this.initHtml(true);
+            this.initJsp(false);
+            $('#createPage').html(navigate("createHtml.do", '#createPage'));
+            $('.userPane').css({
+                color : '#FFF'
+            });
+        } else {
+            this.initHtml(true);
+            this.initJsp(false);
+            initContent();
+        };
     };
 }

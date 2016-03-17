@@ -32,13 +32,12 @@ public class PageContoller {
 		return "test";
 	}
 
-	@RequestMapping(value = "uploadHtml", method = RequestMethod.POST)
+	@RequestMapping(value = "uploadCode", method = RequestMethod.POST)
 	@ResponseBody
 	public String upload_html(@RequestBody UploadFile uploadFile, HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-
-			FileHelper.PutFile(request, uploadFile.getFileBody(), uploadFile.getFileName(), FileType.html);
+			FileHelper.PutFile(request, uploadFile.getFileBody(), uploadFile.getFileName(), uploadFile.getFileType());
 			response.setContentType("text/html;charset=UTF-8");
 
 		} catch (Exception e) {

@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="v-qimiky">
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, target-densitydpi=device-dpi">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, target-densitydpi=device-dpi, user-scalable=no">
         <title>辅助教学平台</title>
         <script src="javascript/jquery-1.11.3.js"></script>
         <script src="javascript/knockout-3.4.0.debug.js"></script>
@@ -26,14 +26,12 @@
         <div data-model="topModel"  id="header" data-bind="css : {topbar : hasCreated}">
             <span id="title">辅助教学平台</span>
         </div>
-        <div data-model="viewModel">
-            <div  id="navigater" data-bind="css : {navibar : hasCreated}">
-                <div id="htmlPage" class="page buttonBase enable" data-bind="click : createHtml, leftVisible : hasLogin" >
-                    创建一个HTML页面
-                </div>
-                <div id="jspPage"   class="page buttonBase enable" data-bind="click : createJsp, leftVisible : hasLogin">
-                    创建一个JSP页面
-                </div>
+        <div data-model="viewModel"  id="navigater" data-bind="css : {navibar : hasCreated}">
+            <div id="htmlPage" class="page buttonBase enable" data-bind="click : createHtml, leftVisible : hasLogin" >
+                创建一个HTML页面
+            </div>
+            <div id="jspPage"   class="page buttonBase enable" data-bind="click : createJsp, leftVisible : hasLogin">
+                创建一个JSP页面
             </div>
         </div>
         <div id="createPage" data-model="CodeEditModel"></div>

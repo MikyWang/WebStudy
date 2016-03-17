@@ -3,8 +3,6 @@
  */
 var spinnerModel = new spinnerModel();
 
-$(window).resize(setBlockSize);
-
 $(document).ready(function() {
     ko.attach("spinnerModel", spinnerModel);
     var spinnerU = {
@@ -34,9 +32,8 @@ function isNullOrUndefined(object) {
     return object == null || object == "" || object == undefined;
 }
 
-function setBlockSize() {
-    var winHeight = $(window).height();
-    $('.blockPane').height(winHeight);
+function setBlock() {
+    $('.blockPane').toggle();
 }
 
 ko.bindingHandlers.leftVisible = {
@@ -91,34 +88,34 @@ ko.bindingHandlers.showVisible = {
 };
 
 ko.bindingHandlers.suffix = {
-    init : function(element, valueAccessor, allBindingsAccessor) {
-        var value = ko.utils.unwrapObservable(valueAccessor());
-        var allBindings = allBindingsAccessor();
+    init : function(element, valueAccessor, allBindingsAccessor, viewModel) {
         $(element).bind('input', function() {
-            if (allBindings.fileName().indexOf('.') < 0) {
-                value(true);
-            } else {
-                value(false);
+            if ($(this).val().indexOf('.') > 0 && !codeEditModel.hasSuffix()) {
+                if (codeEditModel.fileType() == "html") {
+                    $(this).val($(this).val() + 'html');
+                };
+                if (codeEditModel.fileType() == "jsp") {
+                    $(this).val($(this).val() + 'jsp');
+                };
+                codeEditModel.hasSuffix(true);
+            };
+            if ($(this).val().indexOf('.') < 0 && codeEditModel.hasSuffix()) {
+                codeEditModel.hasSuffix(false);
             };
         });
     },
-    update : function(element, valueAccessor, allBindingsAccessor) {
-        var value = ko.utils.unwrapObservable(valueAccessor());
-        var allBindings = allBindingsAccessor();
-        if (value) {
-            allBindings.fileName(allBindings.fileName + 'html');
-            value(false);
-        };
-    }
 };
 
-function navigate(url) {
+function navigate(url, element) {
     var content = null;
     $.ajax({
         url : url,
         async : false,
         success : function(data) {
             content = data;
+            if (element) {
+                $(element).show(300);
+            };
         }
     });
     return content;

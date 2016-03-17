@@ -5,3 +5,10 @@
     position: relative;
     display: block;
 }
+
+#uploadFile {
+    left: 49%;
+    margin-left: -146px;
+    margin-top: 1.5%;
+}
+

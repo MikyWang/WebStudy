@@ -13,11 +13,20 @@ body {
 }
 
 #createPage {
-    float: left;
     position: relative;
     top: 1%;
     width: 86%;
     height: 100%;
+    display: none;
+    margin-left: 200px;
+}
+
+#userPage {
+    display: none;
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #create {
@@ -29,6 +38,7 @@ body {
 
 #navigater {
     width: 100%;
+    height: 100%;
     text-align: center;
     position: relative;
     float: left;

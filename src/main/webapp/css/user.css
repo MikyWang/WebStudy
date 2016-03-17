@@ -31,12 +31,12 @@ img {
 }
 
 #loginTable {
-    position: absolute;
+    position: fixed;
     width: 20%;
 }
 
 #registerTable {
-    position: absolute;
+    position: fixed;
     width: 20%;
 }
 
