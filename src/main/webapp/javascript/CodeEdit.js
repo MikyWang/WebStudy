@@ -2,7 +2,7 @@
 
 var codeEditModel = new CodeEditModel();
 $(document).ready(function() {
-    ko.attach("CodeEditModel", codeEditModel);
+    ko.attach("ContentModel", codeEditModel);
     initContent();
 });
 
@@ -25,6 +25,9 @@ function initContent() {
 function CodeEditModel() {
     var self = this;
     this.fileName = ko.observable();
+    this.canUpload = ko.computed(function() {
+        return !isNullOrUndefined(self.fileName());
+    }, this);
     this.initName = ko.computed(function() {
         if (viewModel.initHtml()) {
             return "Init.html";

@@ -103,6 +103,14 @@ input:disabled {
     float: left;
 }
 
+.preview {
+    float: right;
+    width: 49%;
+    height: 75%;
+    position: relative;
+    top: 30px;
+}
+
 .buttonBase.alert:nth-child(odd) {
     background-color: rgba(101, 78, 177, 1);
 }

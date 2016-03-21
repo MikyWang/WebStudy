@@ -43,6 +43,6 @@ public class PageContoller {
 		} catch (Exception e) {
 
 		}
-		return ("htmls/" + uploadFile.getFileName());
+		return (uploadFile.getFileType() == FileType.html ? "htmls/" : "uploadJsp/" + uploadFile.getFileName());
 	}
 }

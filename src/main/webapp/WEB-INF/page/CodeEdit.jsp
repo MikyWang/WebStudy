@@ -9,10 +9,13 @@
 </head>
 <body>
 	<div class="blockPane"></div>
-	<input type="text" class="textBase input" data-bind='value : fileName, suffix :hasSuffix'
+	<input type="text" class="textBase input"
+		data-bind='value : fileName, valueUpdate : "afterkeydown", suffix :hasSuffix'
 		placeholder="请输入文件名:" />
+	<div class="preview textBase" data-bind='html : fileBody'></div>
 	<textarea class="fileBody textBase" data-bind='value : fileBody, valueUpdate : "afterkeydown"'
 		spellcheck="false"></textarea>
-	<button id="uploadFile" class="buttonBase enable" data-bind="click : uploadFile">上传代码</button>
+	<input value="上传" type="button" id="uploadFile" class="buttonBase"
+		data-bind="click : uploadFile, enable : canUpload, css : {enable : canUpload}" />
 </body>
 </html>

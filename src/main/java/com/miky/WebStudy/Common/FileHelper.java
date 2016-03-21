@@ -58,7 +58,7 @@ public class FileHelper {
 			break;
 
 		case jsp:
-			path = request.getServletContext().getRealPath("/uploadJSP");
+			path = request.getServletContext().getRealPath("/uploadJsp");
 			break;
 
 		default:
