@@ -20,6 +20,10 @@ $(document).ready(function() {
             spinnerModel.isLoading(false);
         }
     });
+    
+    $('.file').bind('change', function() {
+      
+    });
 });
 
 function spinnerModel() {

@@ -43,6 +43,10 @@ body {
     border-radius: 5px;
 }
 
+.file {
+    display: none;
+}
+
 .enable:hover {
     background-color: rgba(46, 211, 214, 1) !important;
 }
@@ -101,14 +105,6 @@ input:disabled {
 
 .buttonBase.alert {
     float: left;
-}
-
-.preview {
-    float: right;
-    width: 49%;
-    height: 75%;
-    position: relative;
-    top: 30px;
 }
 
 .buttonBase.alert:nth-child(odd) {

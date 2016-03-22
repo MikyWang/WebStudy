@@ -7,24 +7,52 @@ $(document).ready(function() {
 });
 
 function initContent() {
-    var initFile = {
-        fileName : codeEditModel.initName()
-    };
-    $.ajax({
-        type : "POST",
-        url : "getSysFile.do",
-        async : true,
-        contentType : "application/json; charset=utf-8",
-        data : JSON.stringify(initFile),
-        success : function(data) {
-            codeEditModel.fileBody(data.fileBody);
-        }
-    });
+    if (!(isNullOrUndefined(viewModel.fileName()) || isNullOrUndefined(viewModel.fileBody()))) {
+        codeEditModel.fileName(viewModel.fileName());
+        codeEditModel.fileBody(viewModel.fileBody());
+        viewModel.fileName(null);
+        viewModel.fileBody(null);
+    } else {
+        var initFile = {
+            fileName : codeEditModel.initName()
+        };
+        $.ajax({
+            type : "POST",
+            url : "getSysFile.do",
+            async : true,
+            contentType : "application/json; charset=utf-8",
+            data : JSON.stringify(initFile),
+            success : function(data) {
+                codeEditModel.fileBody(data.fileBody);
+            }
+        });
+    }
+
 }
 
 function CodeEditModel() {
     var self = this;
     this.fileName = ko.observable();
+    this.previewUrl = ko.observable();
+    this.previewUrl.extend({
+        notify : 'always'
+    });
+    this.showPreview = function() {
+        var uploadFile = {
+            fileName : "default." + self.fileType(),
+            fileBody : self.fileBody(),
+            fileType : self.fileType()
+        };
+        $.ajax({
+            url : "uploadCode.do",
+            type : "POST",
+            contentType : "application/json; charset=utf-8",
+            data : JSON.stringify(uploadFile),
+            success : function(data) {
+                self.previewUrl(data);
+            }
+        });
+    };
     this.canUpload = ko.computed(function() {
         return !isNullOrUndefined(self.fileName());
     }, this);

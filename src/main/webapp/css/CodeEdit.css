@@ -1,13 +1,30 @@
 .fileBody {
-    width: 49%;
-    height: 75%;
+    width: 100%;
+    height: 100%;
     top: 1%;
     position: relative;
     display: block;
 }
 
 #uploadFile {
-    left: 38.5%;
-    margin-top: 1.5%;
+    top: 20px;
+    float: right;
 }
 
+#showPreview {
+    float: right;
+}
+
+.lefter {
+    width: 50%;
+    float: left;
+    height: 80%;
+}
+
+.preview {
+    float: right;
+    width: 49%;
+    height: 80%;
+    position: relative;
+    top: 4.5%;
+}

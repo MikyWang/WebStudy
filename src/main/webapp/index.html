@@ -33,8 +33,18 @@
             <div id="jspPage"   class="page buttonBase enable" data-bind="click : createJsp, leftVisible : hasLogin">
                 创建一个JSP页面
             </div>
+            <div class="page buttonBase enable" data-bind="leftVisible : hasLogin">
+                我的HTML
+            </div>
+            <div class="page buttonBase enable"data-bind="leftVisible : hasLogin">
+                我的JSP
+            </div>
+            <input type="file" class="file" />
+            <div class="page buttonBase enable"data-bind="click : uploadFile,  leftVisible : hasLogin">
+                上传文件
+            </div>
         </div>
-        <div id="createPage" data-model="ContentModel"></div>
+        <div id="contentHost" data-model="ContentModel"></div>
         <div id="userPage" data-model="userModel"></div>
     </body>
 </html>

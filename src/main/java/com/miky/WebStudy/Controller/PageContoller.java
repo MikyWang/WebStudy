@@ -3,6 +3,7 @@ package com.miky.WebStudy.Controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.scripting.xmltags.VarDeclSqlNode;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +44,8 @@ public class PageContoller {
 		} catch (Exception e) {
 
 		}
-		return (uploadFile.getFileType() == FileType.html ? "htmls/" : "uploadJsp/" + uploadFile.getFileName());
+		String result = uploadFile.getFileType() == FileType.html ? "htmls/" : "uploadJsp/";
+		result += uploadFile.getFileName();
+		return result;
 	}
 }
