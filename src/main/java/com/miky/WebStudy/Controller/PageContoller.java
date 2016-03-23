@@ -33,8 +33,9 @@ public class PageContoller {
 		return result;
 	}
 
-	@RequestMapping(value = "/myFiles/{fileType}", method = RequestMethod.GET)
-	public String myFiles(@PathVariable String userId, @PathVariable String fileType, HttpServletRequest request) {
+	@RequestMapping(value = "/myFiles")
+	@ResponseBody
+	public String myFiles(@PathVariable String userId, String fileType, HttpServletRequest request) {
 		return FileHelper.GetFiles(request, FileType.valueOf(fileType), userId);
 	}
 }

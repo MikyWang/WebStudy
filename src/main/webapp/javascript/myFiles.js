@@ -1,13 +1,11 @@
-/**
- * @author wqy81
- */
+//# sourceURL=myFiles.js
+
 var filesModel = new FilesModel();
 
 $(document).ready(function() {
     ko.attach("ContentModel", filesModel);
     $.ajax({
-        url : userModel.userId() + "/myFiles.do" + "/html",
-        type : "GET",
+        url : userModel.userId() + "/myFiles.do" + "?fileType=html",
         success : function(data) {
             var fileList = data.toString().split("-_-");
             for (var i = 0; i < fileList.length; i++) {
@@ -24,3 +22,7 @@ function FilesModel() {
         self.filesName.remove(this);
     };
 }
+
+
+
+//@ sourceURL=myFiles.js

@@ -47,8 +47,18 @@ function indexViewModel() {
     }, this);
     this.height = ko.observable();
 
-    this.showHtmlFiles=function(){
-        $('#contentHost').html(navigate("filePage.do", '#contentHost'));
+    this.showHtmlFiles = function() {
+        if (!self.hasCreated()) {
+            this.initHtml(true);
+            this.initJsp(false);
+            $('#contentHost').html(navigate("filePage.do", '#contentHost'));
+            $('.userPane').css({
+                color : '#FFF'
+            });
+        } else {
+            this.initHtml(true);
+            this.initJsp(false);
+        } ;
     };
 
     this.uploadFile = function() {
