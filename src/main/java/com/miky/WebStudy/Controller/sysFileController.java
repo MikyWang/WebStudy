@@ -24,4 +24,18 @@ public class sysFileController {
 		return service.getSysFile(sysFileKey);
 	}
 
+	@RequestMapping(value = "userPage")
+	public String userPage() {
+		return "User";
+	}
+
+	@RequestMapping(value = "createHtml")
+	public String createHtml() {
+		return "CodeEdit";
+	}
+
+	@RequestMapping(value = "filePage")
+	public String filePage() {
+		return "myFiles";
+	}
 }

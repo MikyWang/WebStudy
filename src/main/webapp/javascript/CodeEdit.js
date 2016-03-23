@@ -44,7 +44,7 @@ function CodeEditModel() {
             fileType : self.fileType()
         };
         $.ajax({
-            url : "uploadCode.do",
+            url : userModel.userId()+"/uploadCode.do",
             type : "POST",
             contentType : "application/json; charset=utf-8",
             data : JSON.stringify(uploadFile),
@@ -90,7 +90,7 @@ function CodeEditModel() {
             fileType : self.fileType()
         };
         $.ajax({
-            url : "uploadCode.do",
+            url : userModel.userId()+"/uploadCode.do",
             type : "POST",
             contentType : "application/json; charset=utf-8",
             data : JSON.stringify(uploadFile),

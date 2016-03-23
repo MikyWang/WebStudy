@@ -47,6 +47,10 @@ function indexViewModel() {
     }, this);
     this.height = ko.observable();
 
+    this.showHtmlFiles=function(){
+        $('#contentHost').html(navigate("filePage.do", '#contentHost'));
+    };
+
     this.uploadFile = function() {
         $('.file').click();
     };

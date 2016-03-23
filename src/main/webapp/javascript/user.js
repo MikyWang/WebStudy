@@ -18,6 +18,7 @@ $(document).ready(function() {
                 userModel.userName(data.userName);
                 userModel.userPassword(data.password);
                 userModel.userMail(data.userMail);
+                userModel.userId(data.userId);
             };
         }
     });
@@ -30,6 +31,7 @@ function userModel() {
         return viewModel.hasLogin();
     }, this);
     this.isRegistering = ko.observable(false);
+    this.userId = ko.observable();
     this.userName = ko.observable("");
     this.userPassword = ko.observable("");
     this.userPasswordT = ko.observable("");
@@ -75,6 +77,11 @@ function userModel() {
                     contentType : "application/json; charset=utf-8",
                     data : JSON.stringify(user),
                     success : function(data) {
+                        if (isNullOrUndefined(data)) {
+                            alert("该用户名或邮箱已被使用.");
+                            return;
+                        };
+                        self.userId(data.userId);
                         viewModel.hasLogin(true);
                         spinnerModel.isLoading(false);
                     }
@@ -101,6 +108,7 @@ function userModel() {
                 if (!isNullOrUndefined(data)) {
                     if (data.password == user.password) {
                         self.userMail(data.userMail);
+                        self.userId(data.userId);
                         viewModel.hasLogin(true);
                     } else {
                         alert("密码错误！");

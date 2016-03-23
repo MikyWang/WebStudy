@@ -3,8 +3,8 @@ package com.miky.WebStudy.Controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.ibatis.scripting.xmltags.VarDeclSqlNode;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,37 +15,26 @@ import com.miky.WebStudy.Common.FileHelper.FileType;
 import com.miky.WebStudy.Entity.UploadFile;
 
 @Controller
+@RequestMapping("/{userId}")
 public class PageContoller {
 
-	@RequestMapping(value = "createHtml")
-	public String createHtml() {
-
-		return "CodeEdit";
-	}
-
-	@RequestMapping(value = "userPage")
-	public String userPage() {
-		return "User";
-	}
-
-	@RequestMapping(value = "test")
-	public String test() {
-		return "test";
-	}
-
-	@RequestMapping(value = "uploadCode", method = RequestMethod.POST)
+	@RequestMapping(value = "/uploadCode", method = RequestMethod.POST)
 	@ResponseBody
-	public String upload_html(@RequestBody UploadFile uploadFile, HttpServletRequest request,
-			HttpServletResponse response) {
+	public String upload_html(@PathVariable String userId, @RequestBody UploadFile uploadFile,
+			HttpServletRequest request, HttpServletResponse response) {
 		try {
-			FileHelper.PutFile(request, uploadFile.getFileBody(), uploadFile.getFileName(), uploadFile.getFileType());
+			FileHelper.PutFile(request, uploadFile, userId);
 			response.setContentType("text/html;charset=UTF-8");
-
 		} catch (Exception e) {
 
 		}
 		String result = uploadFile.getFileType() == FileType.html ? "htmls/" : "uploadJsp/";
-		result += uploadFile.getFileName();
+		result += userId + "/" + uploadFile.getFileName();
 		return result;
+	}
+
+	@RequestMapping(value = "/myFiles/{fileType}", method = RequestMethod.GET)
+	public String myFiles(@PathVariable String userId, @PathVariable String fileType, HttpServletRequest request) {
+		return FileHelper.GetFiles(request, FileType.valueOf(fileType), userId);
 	}
 }
