@@ -8,8 +8,8 @@
 </head>
 <body>
 	<div class="FileContainer" data-bind=" foreach : filesName">
-		<a href="javascript:void(0);" class="singleFile" data-bind="text : $data"></a><a
-			href="javascript:void(0);" class="buttonBase enable" data-bind="click : $(parent.remove">删除</a>
+		<a href="javascript:void(0);" class="singleFile" data-bind="text : file"></a><a
+			href="javascript:void(0);" class="buttonBase enable" data-bind="click : $parent.remove">删除</a>
 	</div>
 </body>
 </html>

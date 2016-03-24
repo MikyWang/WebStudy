@@ -9,7 +9,9 @@ $(document).ready(function() {
         success : function(data) {
             var fileList = data.toString().split("-_-");
             for (var i = 0; i < fileList.length; i++) {
-                filesModel.filesName.push(fileList[i]);
+                filesModel.filesName.push({
+                    file : ko.observable(fileList[i])
+                });
             };
         }
     });
@@ -22,7 +24,5 @@ function FilesModel() {
         self.filesName.remove(this);
     };
 }
-
-
 
 //@ sourceURL=myFiles.js

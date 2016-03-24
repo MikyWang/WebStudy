@@ -47,8 +47,11 @@ public class FileHelper {
 		File[] tempList = file.listFiles();
 		String result = "";
 		for (int i = 0; i < tempList.length; i++) {
-			if (tempList[i].isFile() && tempList[i].getName().equalsIgnoreCase("default." + fileType)) {
-				result += tempList[i].getName() + "-_-";
+			if (tempList[i].isFile() && !tempList[i].getName().equalsIgnoreCase("default." + fileType)) {
+				result += tempList[i].getName();
+				if (i < tempList.length - 1) {
+					result += "-_-";
+				}
 			}
 		}
 		return result;
@@ -70,11 +73,11 @@ public class FileHelper {
 		String path = null;
 		switch (fileType) {
 		case html:
-			path = createDir(request.getServletContext().getRealPath("/htmls") + "/" + userId);
+			path = createDir(request.getServletContext().getRealPath("/htmls") + "\\" + userId);
 			break;
 
 		case jsp:
-			path = createDir(request.getServletContext().getRealPath("/uploadJsp") + "/" + userId);
+			path = createDir(request.getServletContext().getRealPath("/uploadJsp") + "\\" + userId);
 			break;
 
 		default:
