@@ -10,6 +10,11 @@ body {
     font-family: "microsoft yahei", "Times New Roman", "宋体", Times, serif;
 }
 
+.container {
+    width: 100%;
+    height: 100%;
+}
+
 .navibar {
     width: 200px !important;
 }

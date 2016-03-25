@@ -2,7 +2,6 @@
 
 var codeEditModel = new CodeEditModel();
 $(document).ready(function() {
-    ko.attach("ContentModel", codeEditModel);
     initContent();
 });
 
@@ -34,6 +33,7 @@ function CodeEditModel() {
     var self = this;
     this.fileName = ko.observable();
     this.previewUrl = ko.observable();
+    
     this.previewUrl.extend({
         notify : 'always'
     });
@@ -100,5 +100,5 @@ function CodeEditModel() {
         });
     };
 }
-
+ko.attach("ContentModel", codeEditModel);
 //@ sourceURL=CodeEdit.js

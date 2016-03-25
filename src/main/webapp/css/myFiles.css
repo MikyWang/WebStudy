@@ -1,3 +1,14 @@
-body {
-	
+.fileContainer {
+    position: relative;
+    width: 5%;
+    height: 11%;
+    float: left;
+}
+.singleFile {
+    display: block;
+    left: 0px;
+    bottom: 0px;
+    position: absolute;
+    color:black;
+    text-decoration: none;
 }

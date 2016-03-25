@@ -17,7 +17,6 @@
         <script src="javascript/setUp.js"></script>
         <link rel="stylesheet" type="text/css" href="css/index.css"/>
         <link rel="stylesheet" type="text/css" href="css/baseStyle.css"/>
-        <script src="javascript/index.js"></script>
     </head>
     <body>
         <div data-model="spinnerModel">
@@ -36,7 +35,7 @@
             <div class="page buttonBase enable" data-bind="leftVisible : hasLogin, click : showHtmlFiles">
                 我的HTML
             </div>
-            <div class="page buttonBase enable"data-bind="leftVisible : hasLogin">
+            <div class="page buttonBase enable"data-bind="leftVisible : hasLogin, click : showJspFiles">
                 我的JSP
             </div>
             <input type="file" class="file" />
@@ -44,7 +43,9 @@
                 上传文件
             </div>
         </div>
-        <div id="contentHost" data-model="ContentModel"></div>
+        <div id="CodeEdit" class="contentHost" data-model="ContentModel"></div>
+        <div id="myFiles" class="contentHost" data-model="FilesModel"></div>
         <div id="userPage" data-model="userModel"></div>
+        <script src="javascript/index.js"></script>
     </body>
 </html>

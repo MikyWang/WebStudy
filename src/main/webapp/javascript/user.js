@@ -7,9 +7,7 @@ function userSize() {
     userModel.winWidth($(window).width());
 }
 
-
 $(document).ready(function() {
-    ko.attach("userModel", userModel);
     $.ajax({
         url : "loginByRecord.do",
         async : true,
@@ -121,4 +119,6 @@ function userModel() {
         });
     };
 };
+
+ko.attach("userModel", userModel);
 //@ sourceURL=user.js

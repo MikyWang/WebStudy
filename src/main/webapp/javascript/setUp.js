@@ -2,6 +2,7 @@
  * @author v-qimiky
  */
 var spinnerModel = new spinnerModel();
+window.ContentHost = null;
 
 $(document).ready(function() {
     ko.attach("spinnerModel", spinnerModel);
@@ -20,11 +21,16 @@ $(document).ready(function() {
             spinnerModel.isLoading(false);
         }
     });
-    
-    $('.file').bind('change', function() {
-      
-    });
+
 });
+
+function ShowHost(page) {
+    if (!isNullOrUndefined(window.ContentHost)) {
+        $(window.ContentHost).hide(300);
+    }
+    window.ContentHost = page;
+    $(window.ContentHost).show(300);
+}
 
 function spinnerModel() {
     var self = this;
@@ -33,7 +39,7 @@ function spinnerModel() {
 }
 
 function isNullOrUndefined(object) {
-    return object == null || object == "" || object == undefined;
+    return object == undefined || object == null || object == "";
 }
 
 function setBlock() {

@@ -2,8 +2,6 @@ var viewModel = new indexViewModel();
 var topModel = new topModel();
 
 $(document).ready(function() {
-    ko.attach("viewModel", viewModel);
-    ko.attach("topModel", topModel);
     $('#userPage').html(navigate("userPage.do", '#userPage'));
     $('.file').bind('change', function() {
         var reader = new FileReader();
@@ -42,23 +40,35 @@ function indexViewModel() {
     this.hasLogin = ko.observable(false);
     this.fileName = ko.observable();
     this.fileBody = ko.observable();
-    this.hasCreated = ko.computed(function() {
-        return this.initHtml() || this.initJsp();
-    }, this);
+    this.hasCreated = ko.observable(false);
     this.height = ko.observable();
+    this.myHtml = ko.observable(false);
+    this.myJsp = ko.observable(false);
 
-    this.showHtmlFiles = function() {
+    this.showJspFiles = function() {
+        self.myHtml(false);
+        self.myJsp(true);
+        self.showFiles();
+    };
+
+    this.showFiles = function() {
+        ShowHost('#myFiles.contentHost');
         if (!self.hasCreated()) {
-            this.initHtml(true);
-            this.initJsp(false);
-            $('#contentHost').html(navigate("filePage.do", '#contentHost'));
+            self.hasCreated(true);
             $('.userPane').css({
                 color : '#FFF'
             });
-        } else {
-            this.initHtml(true);
-            this.initJsp(false);
-        } ;
+        };
+        if ( typeof (filesModel) == 'undefined') {
+            $('#myFiles.contentHost').html(navigate("filePage.do", '#myFiles.contentHost'));
+        };
+        initFiles();
+    };
+
+    this.showHtmlFiles = function() {
+        self.myHtml(true);
+        self.myJsp(false);
+        self.showFiles();
     };
 
     this.uploadFile = function() {
@@ -66,32 +76,38 @@ function indexViewModel() {
     };
 
     this.createJsp = function() {
+        this.initJsp(true);
+        this.initHtml(false);
+        ShowHost('#CodeEdit.contentHost');
         if (!self.hasCreated()) {
-            this.initJsp(true);
-            this.initHtml(false);
-            $('#contentHost').html(navigate("createHtml.do", '#contentHost'));
+            self.hasCreated(true);
+        };
+        if ( typeof (codeEditModel) == 'undefined') {
+            $('#CodeEdit.contentHost').html(navigate("createHtml.do", '#CodeEdit.contentHost'));
             $('.userPane').css({
                 color : '#FFF'
             });
         } else {
-            this.initJsp(true);
-            this.initHtml(false);
             initContent();
         };
-
     };
     this.createHtml = function() {
+        ShowHost('#CodeEdit.contentHost');
+        this.initHtml(true);
+        this.initJsp(false);
         if (!self.hasCreated()) {
-            this.initHtml(true);
-            this.initJsp(false);
-            $('#contentHost').html(navigate("createHtml.do", '#contentHost'));
+            self.hasCreated(true);
+        };
+        if ( typeof (codeEditModel) == 'undefined') {
+            $('#CodeEdit.contentHost').html(navigate("createHtml.do", '#CodeEdit.contentHost'));
             $('.userPane').css({
                 color : '#FFF'
             });
         } else {
-            this.initHtml(true);
-            this.initJsp(false);
             initContent();
         };
     };
 }
+
+ko.attach("viewModel", viewModel);
+ko.attach("topModel", topModel);
