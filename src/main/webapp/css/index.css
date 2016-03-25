@@ -15,10 +15,14 @@ body {
 .contentHost {
     position: relative;
     top: 1%;
-    width: 86%;
+    width: 85%;
     height: 100%;
     display: none;
     margin-left: 200px;
+}
+
+#myFiles.contentHost{
+ background-color: white;
 }
 
 #userPage {

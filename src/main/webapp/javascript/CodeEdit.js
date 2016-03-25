@@ -12,6 +12,7 @@ function initContent() {
         viewModel.fileName(null);
         viewModel.fileBody(null);
     } else {
+        codeEditModel.fileName('');
         var initFile = {
             fileName : codeEditModel.initName()
         };
@@ -33,7 +34,7 @@ function CodeEditModel() {
     var self = this;
     this.fileName = ko.observable();
     this.previewUrl = ko.observable();
-    
+
     this.previewUrl.extend({
         notify : 'always'
     });

@@ -10,6 +10,7 @@ function initFiles() {
             filesModel.filesName.removeAll();
             for (var i = 0; i < fileList.length; i++) {
                 if (!isNullOrUndefined(fileList[i])) {
+                    var row = Math.floor(fileList[i].toString().length / 9);
                     filesModel.filesName.push({
                         image : ko.computed(function() {
                             if (viewModel.myHtml()) {

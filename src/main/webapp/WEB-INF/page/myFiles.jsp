@@ -7,10 +7,10 @@
 <title>我的文件</title>
 </head>
 <body>
-	<div class="container" data-bind=" foreach : filesName">
+	<div id="files" class="container" data-bind=" foreach : filesName">
 		<div class="fileContainer">
-			<img data-bind="attr : {src : image}" /> <a href="javascript:void(0);" class="singleFile"
-				data-bind="text : file"></a>
+			<img data-bind="attr : {src : image}" />
+			<div class="singleFile" data-bind="text : file"></div>
 		</div>
 	</div>
 	<script src="javascript/myFiles.js"></script>

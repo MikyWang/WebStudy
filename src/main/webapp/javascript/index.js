@@ -78,6 +78,10 @@ function indexViewModel() {
     this.createJsp = function() {
         this.initJsp(true);
         this.initHtml(false);
+        self.createFile();
+    };
+
+    this.createFile = function() {
         ShowHost('#CodeEdit.contentHost');
         if (!self.hasCreated()) {
             self.hasCreated(true);
@@ -91,21 +95,11 @@ function indexViewModel() {
             initContent();
         };
     };
+
     this.createHtml = function() {
-        ShowHost('#CodeEdit.contentHost');
         this.initHtml(true);
         this.initJsp(false);
-        if (!self.hasCreated()) {
-            self.hasCreated(true);
-        };
-        if ( typeof (codeEditModel) == 'undefined') {
-            $('#CodeEdit.contentHost').html(navigate("createHtml.do", '#CodeEdit.contentHost'));
-            $('.userPane').css({
-                color : '#FFF'
-            });
-        } else {
-            initContent();
-        };
+        self.createFile();
     };
 }
 

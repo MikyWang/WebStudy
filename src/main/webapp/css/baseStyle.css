@@ -6,8 +6,16 @@ html, body {
 body {
     border: 0;
     margin: 0;
+    padding: 0;
     background-color: rgba(217, 217, 217, 1);
+}
+
+* {
     font-family: "microsoft yahei", "Times New Roman", "宋体", Times, serif;
+}
+
+input {
+    box-shadow: 2px 2px 3px rgba(50,50,50,0.4);
 }
 
 .container {
@@ -46,6 +54,8 @@ body {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
+    box-shadow: 2px 2px 3px rgba(50,50,50,0.4);
+    font-size: 16px;
 }
 
 .file {

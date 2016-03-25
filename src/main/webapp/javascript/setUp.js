@@ -26,10 +26,10 @@ $(document).ready(function() {
 
 function ShowHost(page) {
     if (!isNullOrUndefined(window.ContentHost)) {
-        $(window.ContentHost).hide(300);
+        $(window.ContentHost).hide(400);
     }
     window.ContentHost = page;
-    $(window.ContentHost).show(300);
+    $(window.ContentHost).show(400);
 }
 
 function spinnerModel() {
@@ -71,6 +71,13 @@ ko.bindingHandlers.leftVisible = {
                 opacity : '1',
             }, "slow");
         };
+    }
+};
+
+ko.bindingHandlers.height = {
+    update : function(element, valueAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        $(element).height(value);
     }
 };
 
