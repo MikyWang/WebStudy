@@ -26,7 +26,7 @@ $(document).ready(function() {
 
 function ShowHost(page) {
     if (!isNullOrUndefined(window.ContentHost)) {
-        $(window.ContentHost).hide(400);
+        $(window.ContentHost).hide();
     }
     window.ContentHost = page;
     $(window.ContentHost).show(400);

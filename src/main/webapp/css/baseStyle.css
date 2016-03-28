@@ -3,6 +3,15 @@ html, body {
     width: 100%;
 }
 
+.highLight {
+    color: #FFFFFF;
+    background-color: rgba(33, 98, 243, 0.72) !important;
+    word-wrap: break-word;
+    word-break: break-all;
+    background-color: rgba(78, 108, 198, 1);
+    z-index: 102;
+}
+
 body {
     border: 0;
     margin: 0;

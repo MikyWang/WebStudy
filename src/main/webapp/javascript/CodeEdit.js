@@ -13,6 +13,7 @@ function initContent() {
         viewModel.fileBody(null);
     } else {
         codeEditModel.fileName('');
+        codeEditModel.previewUrl('');
         var initFile = {
             fileName : codeEditModel.initName()
         };
@@ -45,7 +46,7 @@ function CodeEditModel() {
             fileType : self.fileType()
         };
         $.ajax({
-            url : userModel.userId()+"/uploadCode.do",
+            url : userModel.userId() + "/uploadCode.do",
             type : "POST",
             contentType : "application/json; charset=utf-8",
             data : JSON.stringify(uploadFile),
@@ -91,7 +92,7 @@ function CodeEditModel() {
             fileType : self.fileType()
         };
         $.ajax({
-            url : userModel.userId()+"/uploadCode.do",
+            url : userModel.userId() + "/uploadCode.do",
             type : "POST",
             contentType : "application/json; charset=utf-8",
             data : JSON.stringify(uploadFile),
@@ -101,5 +102,6 @@ function CodeEditModel() {
         });
     };
 }
+
 ko.attach("ContentModel", codeEditModel);
 //@ sourceURL=CodeEdit.js

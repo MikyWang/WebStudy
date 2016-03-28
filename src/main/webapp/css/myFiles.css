@@ -5,6 +5,26 @@
     text-align: center;
     margin: 10px;
     height: 135px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.fileControl {
+    width: 100px;
+    float: right;
+}
+
+.toolbar {
+    height: 5%;
+    width: 100%;
+    background-color: rgba(217, 217, 217, 1);
+}
+
+.container2 {
+    height: 95% !important;
 }
 
 .fileContainer:hover {

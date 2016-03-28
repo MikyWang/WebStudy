@@ -20,7 +20,11 @@ function initFiles() {
                                 return "images/jsp.png";
                             };
                         }, this),
-                        file : ko.observable(fileList[i])
+                        file : ko.observable(fileList[i]),
+                        isSelected : ko.observable(false),
+                        highLight : function() {
+                            this.isSelected(!this.isSelected());
+                        }
                     });
                 };
             };
@@ -30,9 +34,13 @@ function initFiles() {
 
 function FilesModel() {
     var self = this;
+
+    this.selectedFiles=ko.observableArray([]);
     this.filesName = ko.observableArray([]);
+    this.canDelete=ko.computed()
+    
     this.remove = function() {
-        self.filesName.remove(this);
+        self.filesName
     };
     this.fileType = ko.computed(function() {
         if (viewModel.myHtml()) {
