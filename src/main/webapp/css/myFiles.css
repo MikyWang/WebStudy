@@ -24,7 +24,9 @@
 }
 
 .container2 {
-    height: 95% !important;
+    height: 83% !important;
+    margin-bottom: 1%;
+    background-color: #FFFFFF;
 }
 
 .fileContainer:hover {

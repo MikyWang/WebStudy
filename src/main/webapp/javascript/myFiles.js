@@ -24,6 +24,11 @@ function initFiles() {
                         isSelected : ko.observable(false),
                         highLight : function() {
                             this.isSelected(!this.isSelected());
+                            if (filesModel.selectedFiles.indexOf(this) == -1) {
+                                filesModel.selectedFiles.push(this);
+                            } else {
+                                filesModel.selectedFiles.remove(this);
+                            }
                         }
                     });
                 };
@@ -35,12 +40,19 @@ function initFiles() {
 function FilesModel() {
     var self = this;
 
-    this.selectedFiles=ko.observableArray([]);
+    this.selectedFiles = ko.observableArray([]);
     this.filesName = ko.observableArray([]);
-    this.canDelete=ko.computed()
-    
+    this.canDelete = ko.computed(function() {
+        return this.selectedFiles().length > 0;
+    }, this);
+
     this.remove = function() {
-        self.filesName
+        $('div.highLight').hide(300, function() {
+            self.selectedFiles().forEach(function(file) {
+                self.filesName.remove(file);
+            });
+            self.selectedFiles.removeAll();
+        });
     };
     this.fileType = ko.computed(function() {
         if (viewModel.myHtml()) {
