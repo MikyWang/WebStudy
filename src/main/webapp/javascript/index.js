@@ -4,6 +4,7 @@ var topModel = new topModel();
 $(document).ready(function() {
     $('#userPage').html(navigate("userPage.do", '#userPage'));
     $('.file').bind('change', function() {
+        spinnerModel.isLoading(true);
         var reader = new FileReader();
         var file = this.files[0];
         reader.readAsText(file, "utf8");
@@ -22,7 +23,7 @@ $(document).ready(function() {
                 return;
             }
         };
-
+        spinnerModel.isLoading(false);
     });
 });
 
@@ -73,6 +74,7 @@ function indexViewModel() {
 
     this.uploadFile = function() {
         $('.file').click();
+
     };
 
     this.createJsp = function() {
