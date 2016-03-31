@@ -33,6 +33,29 @@ public class PageContoller {
 		return result;
 	}
 
+	@RequestMapping(value = "/getFileUrl")
+	@ResponseBody
+	public String getFile(@PathVariable String userId, String fileType, String fileName) {
+		String result = FileType.valueOf(fileType) == FileType.html ? "htmls/" : "uploadJsp/";
+		result += userId + "/" + fileName;
+		return result;
+	}
+
+	@RequestMapping(value = "/deleteFiles")
+	@ResponseBody
+	public boolean deleteFiles(@PathVariable String userId, String fileType, String fileNames,
+			HttpServletRequest request) {
+		String[] FileNames = fileNames.split("-_-");
+		try {
+			for (int i = 0; i < FileNames.length; i++) {
+				FileHelper.DeleteFile(request, FileNames[i], FileType.valueOf(fileType), userId);
+			}
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+
 	@RequestMapping(value = "/myFiles")
 	@ResponseBody
 	public String myFiles(@PathVariable String userId, String fileType, HttpServletRequest request) {

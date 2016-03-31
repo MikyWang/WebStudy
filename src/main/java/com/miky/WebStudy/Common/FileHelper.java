@@ -22,6 +22,14 @@ public class FileHelper {
 		html, jsp
 	}
 
+	public static void DeleteFile(HttpServletRequest request, String fileName, FileType fileType, String userId)
+			throws Exception {
+		File file = new File(getPath(request, fileType, userId), fileName);
+		if (file.isFile() && file.exists()) {
+			file.delete();
+		}
+	}
+
 	public static String GetFile(HttpServletRequest request, String fileName, FileType fileType, String userId)
 			throws Exception {
 
