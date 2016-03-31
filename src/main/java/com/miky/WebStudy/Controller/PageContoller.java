@@ -3,6 +3,7 @@ package com.miky.WebStudy.Controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.scripting.xmltags.VarDeclSqlNode;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,7 +36,7 @@ public class PageContoller {
 
 	@RequestMapping(value = "/getFileUrl")
 	@ResponseBody
-	public String getFile(@PathVariable String userId, String fileType, String fileName) {
+	public String getFileUrl(@PathVariable String userId, String fileType, String fileName) {
 		String result = FileType.valueOf(fileType) == FileType.html ? "htmls/" : "uploadJsp/";
 		result += userId + "/" + fileName;
 		return result;
@@ -54,6 +55,19 @@ public class PageContoller {
 			return false;
 		}
 		return true;
+	}
+
+	@RequestMapping(value = "/getFile")
+	@ResponseBody
+	public String getFile(@PathVariable String userId, String fileType, String fileName, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			String result= FileHelper.GetFile(request, fileName, FileType.valueOf(fileType), userId);
+			response.setContentType("text/html;charset=UTF-8");
+			return result;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	@RequestMapping(value = "/myFiles")

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
-import com.miky.WebStudy.Common.FileHelper.FileType;
 import com.miky.WebStudy.Entity.UploadFile;
 
 @Service
@@ -37,7 +36,7 @@ public class FileHelper {
 
 		FileInputStream fileInputStream = new FileInputStream(file);
 		BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
-		byte[] b = new byte[1000];
+		byte[] b = new byte[10000];
 		int i = 0;
 		String initHtml = null;
 		while ((i = bufferedInputStream.read(b)) != -1) {

@@ -58,10 +58,10 @@ function FilesModel() {
     }, this);
 
     this.clearUp = function() {
-        self.filesName.removeAll();
-        self.selectedFiles.removeAll();
         self.isBlocking(false);
         self.isReading(false);
+        self.filesName.removeAll();
+        self.selectedFiles.removeAll();
     };
 
     this.back = function() {
@@ -70,7 +70,22 @@ function FilesModel() {
     };
 
     this.edit = function() {
-
+        viewModel.fileName(self.selectedFiles()[0].file());
+        var url = userModel.userId() + "/getFile.do?fileType=" + self.fileType() + "&fileName=" + self.selectedFiles()[0].file();
+        $.ajax({
+            url : url,
+            dataType : "html",
+            success : function(data) {
+                viewModel.fileBody(data);
+                if (self.fileType() == "html") {
+                    viewModel.createHtml();
+                };
+                if (self.fileType() == "jsp") {
+                    viewModel.createJsp();
+                };
+                self.clearUp();
+            }
+        });
     };
 
     this.read = function() {
@@ -95,9 +110,6 @@ function FilesModel() {
             self.selectedFiles.removeAll();
             $.ajax({
                 url : url,
-                success : function(data) {
-                    alert(data);
-                }
             });
         });
     };

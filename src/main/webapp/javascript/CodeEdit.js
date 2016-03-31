@@ -11,9 +11,9 @@ function initContent() {
         codeEditModel.fileBody(viewModel.fileBody());
         viewModel.fileName(null);
         viewModel.fileBody(null);
-    } else {
-        codeEditModel.fileName('');
         codeEditModel.previewUrl('');
+    } else {
+        codeEditModel.clearUp();
         var initFile = {
             fileName : codeEditModel.initName()
         };
@@ -39,6 +39,12 @@ function CodeEditModel() {
     this.previewUrl.extend({
         notify : 'always'
     });
+
+    this.clearUp = function() {
+        codeEditModel.fileName('');
+        codeEditModel.previewUrl('');
+    };
+
     this.showPreview = function() {
         var uploadFile = {
             fileName : "default." + self.fileType(),
