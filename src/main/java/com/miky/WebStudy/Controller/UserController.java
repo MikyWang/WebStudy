@@ -1,15 +1,15 @@
 package com.miky.WebStudy.Controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.miky.WebStudy.Common.MacUtil;
-import com.miky.WebStudy.Entity.LoginRecord;
 import com.miky.WebStudy.Entity.user;
 import com.miky.WebStudy.Service.RecordService;
 import com.miky.WebStudy.Service.UserService;
@@ -24,37 +24,32 @@ public class UserController {
 
 	@RequestMapping(value = "loginByRecord")
 	@ResponseBody
-	public user loginByRecord() {
-		LoginRecord loginRecord = new LoginRecord();
-		try {
-			loginRecord.setLoginMac(MacUtil.getMacAddress());
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		LoginRecord record = recordService.selectLoginRecordByMac(loginRecord);
-		user user = new user();
-		if (record != null) {
-			user.setUserId(record.getUserId());
+	public user loginByRecord(HttpSession session) {
+		user user = (user) session.getAttribute("user");
+		if (user != null) {
+			return userService.selectUser(user);
 		} else {
-			user = null;
+			return null;
 		}
-		return userService.selectUser(user);
 
+	}
+
+	@RequestMapping(value = "logout.do")
+	@ResponseBody
+	public void logout(HttpSession session) {
+		if (session.getAttribute("user") != null) {
+			session.removeAttribute("user");
+		}
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	@ResponseBody
-	public user login(@RequestBody user user) {
+	public user login(@RequestBody user user, HttpSession session) {
 
 		user selecteduser = userService.selectUser(user);
 		if (selecteduser != null) {
-			LoginRecord loginRecord = new LoginRecord();
 			try {
-				loginRecord.setLoginMac(MacUtil.getMacAddress());
-				loginRecord.setUserId(selecteduser.getUserId());
-				loginRecord.setUserPassword(selecteduser.getPassword());
-				loginRecord.setUserName(selecteduser.getUserName());
-				recordService.insertRecord(loginRecord);
+				session.setAttribute("user", selecteduser);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}

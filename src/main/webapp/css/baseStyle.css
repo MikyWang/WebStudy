@@ -10,6 +10,7 @@ html, body {
     word-break: break-all;
     background-color: rgba(78, 108, 198, 1);
     z-index: 102;
+    
 }
 
 .blockPane {

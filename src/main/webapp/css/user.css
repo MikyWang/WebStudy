@@ -33,6 +33,7 @@ img {
 #loginTable {
     position: fixed;
     width: 20%;
+    left: 40%;
 }
 
 #registerTable {
